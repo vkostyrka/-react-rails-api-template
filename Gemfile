@@ -11,7 +11,11 @@ gem "bootsnap", require: false
 gem "rack-cors"
 
 group :development, :test do
+  gem 'database_cleaner'
+  gem 'factory_bot_rails'
   gem "pry"
+  gem "rspec-rails"
+  gem 'simplecov'
 end
 
 group :development do
