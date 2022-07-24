@@ -1,0 +1,469 @@
+inherit_gem:
+  prettier: rubocop.yml
+  rubocop-config-prettier: config/rubocop.yml
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+RSpec:
+  Language:
+    Examples:
+      Regular:
+      - they
+      - stub_cloudmersive_get_text
+    HookScopes:
+      - permissions
+    Includes:
+      Examples:
+        - permission_examples
+AllCops:
+  NewCops: enable
+  Exclude:
+    - db/schema.rb
+    - db/migrate/*
+    - config/environments/*
+    - config/routes.rb
+    - Gemfile
+    - spec/factories/*
+
+Lint/UselessAssignment:
+  Enabled: true
+  Exclude:
+    - node_modules/slick-carousel/slick/config.rb
+# Metrics Cops
+Metrics/ClassLength:
+  Description: 'Avoid classes longer than 100 lines of code.'
+  Max: 250
+  Enabled: true
+
+Metrics/ModuleLength:
+  Description: 'Avoid modules longer than 100 lines of code.'
+  Max: 102
+  Enabled: true
+
+Metrics/ParameterLists:
+  Description: 'Pass no more than four parameters into a method.'
+  Max: 5
+  Enabled: true
+  CountKeywordArgs: false
+
+Metrics/MethodLength:
+  Description: 'Avoid methods longer than 30 lines of code.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#short-methods'
+  Max: 30
+  Enabled: true
+  Exclude:
+    - db/migrate/*
+Metrics/BlockLength:
+  CountComments: false
+  Max: 25
+  Exclude:
+    - db/schema.rb
+    - config/routes.rb
+    - db/migrate/*
+    - './spec/**/*.rb'
+    - './spec/.*rb'
+    - '**/*json.jbuilder'
+
+  IgnoredMethods:
+    - context
+    - describe
+    - it
+    - shared_examples
+    - shared_examples_for
+    - namespace
+    - draw
+    - configure
+    - group
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+# Style Cops
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/NumericPredicate:
+  Enabled: false
+
+Style/GlobalVars:
+  Enabled: false
+
+Style/RescueModifier:
+  Enabled: false
+
+Style/ArgumentsForwarding:
+  Enabled: true
+
+Style/CollectionCompact:
+  Enabled: true
+
+Style/DocumentDynamicEvalDefinition:
+  Enabled: true
+
+Style/EndlessMethod:
+  Enabled: true
+
+Style/HashExcept:
+  Enabled: true
+
+Style/IfWithBooleanLiteralBranches:
+  Enabled: true
+
+Style/NegatedIfElseCondition:
+  Enabled: true
+
+Style/NilLambda:
+  Enabled: true
+
+Style/RedundantArgument:
+  Enabled: true
+
+Style/SwapValues:
+  Enabled: true
+
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/**/*'
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Description: 'Checks style of children classes and modules.'
+  Enabled: false
+  EnforcedStyle: nested
+
+Style/CollectionMethods:
+  Enabled: true
+  PreferredMethods:
+    find: detect
+    inject: reduce
+    collect: map
+    find_all: select
+
+Style/Documentation:
+  Description: 'Document classes and non-namespace modules.'
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Description: >-
+                 Favor modifier if/unless usage when you have a
+                 single-line body.
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#if-as-a-modifier'
+  Enabled: true
+
+Style/InlineComment:
+  Description: 'Avoid inline comments.'
+  Enabled: false
+
+Style/LineEndConcatenation:
+  Description: >-
+                 Use \ instead of + or << to concatenate two string literals at
+                 line end.
+  Enabled: true
+
+Style/StringLiterals:
+  Description: 'Checks if uses of quotes match the configured preference.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#consistent-string-literals'
+  EnforcedStyle: single_quotes
+  Enabled: true
+
+Style/TrailingCommaInArguments:
+  Description: 'Checks for trailing comma in argument lists.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-trailing-array-commas'
+  EnforcedStyleForMultiline: no_comma
+  SupportedStylesForMultiline:
+    - no_comma
+  Enabled: true
+
+Style/TrailingCommaInArrayLiteral:
+  Description: 'Checks for trailing comma in array literals.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-trailing-array-commas'
+  EnforcedStyleForMultiline: no_comma
+  SupportedStylesForMultiline:
+    - no_comma
+  Enabled: true
+
+Style/TrailingCommaInHashLiteral:
+  Description: 'Checks for trailing comma in hash literals.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-trailing-array-commas'
+  EnforcedStyleForMultiline: no_comma
+  SupportedStylesForMultiline:
+    - no_comma
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/ExponentialNotation:
+  Enabled: true
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/OptionHash:
+  Enabled: true
+
+Style/QuotedSymbols:
+  # Explicitly setting this because the GH action was acting as if `EnforcedStyle: double_quotes` but locally
+  # as `EnforcedStyle: same_as_string_literals`
+  Enabled: true
+  EnforcedStyle: same_as_string_literals
+
+Layout/LineLength:
+  Description: 'Limit lines to 120 characters.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#80-character-limits'
+  Max: 120
+  IgnoredPatterns: ['(\A|\s)#']
+  Exclude:
+    - 'bin/**/*'
+    - 'spec/**/*'
+Layout/ClassStructure:
+ Enabled: true
+ ExpectedOrder:
+   - module_inclusion
+   - constants
+   - association
+   - public_attribute_macros
+   - public_delegate
+   - macros
+   - public_class_methods
+   - initializer
+   - public_methods
+   - protected_attribute_macros
+   - protected_methods
+   - private_attribute_macros
+   - private_delegate
+   - private_methods
+
+# Rails Cops
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Rails/Delegate:
+  Description: 'Prefer delegate method for delegations.'
+  Enabled: false
+
+Rails/LexicallyScopedActionFilter:
+  Enabled: false
+
+Rails/UnknownEnv:
+  Environments:
+    - development
+    - test
+    - production
+    - staging
+
+Rails/ActiveRecordCallbacksOrder:
+  Enabled: true
+
+Rails/AfterCommitOverride:
+  Enabled: true
+
+Rails/FindById:
+  Enabled: true
+
+Rails/Inquiry:
+  Enabled: true
+
+Rails/MailerName:
+  Enabled: true
+
+Rails/MatchRoute:
+  Enabled: true
+
+Rails/PluckInWhere:
+  Enabled: true
+
+Rails/RenderInline:
+  Enabled: true
+
+Rails/RenderPlainText:
+  Enabled: true
+
+Rails/SquishedSQLHeredocs:
+  Enabled: true
+
+Rails/WhereExists:
+  Enabled: true
+
+Rails/WhereNot:
+  Enabled: true
+
+Rails/FilePath:
+  EnforcedStyle: arguments
+
+Rails/ShortI18n:
+  Enabled: false
+
+Rails/AttributeDefaultBlockValue:
+  Enabled: true
+
+Rails/WhereEquals:
+  Enabled: true
+
+# Bundler Cops
+
+Bundler/OrderedGems:
+  Enabled: false
+
+# Naming
+
+Naming/AccessorMethodName:
+  Enabled: false
+
+Naming/VariableNumber:
+  CheckMethodNames: false
+  Exclude:
+    - 'spec/**/*'
+
+# Lint
+
+Lint/EmptyClass:
+  Enabled: true
+  AllowComments: true
+
+Lint/RescueException:
+  Enabled: false
+
+Lint/AmbiguousAssignment:
+  Enabled: true
+
+Lint/DeprecatedConstants:
+  Enabled: true
+
+Lint/DuplicateBranch:
+  Enabled: true
+
+Lint/DuplicateRegexpCharacterClassElement:
+  Enabled: true
+
+Lint/EmptyBlock:
+  Enabled: true
+  Exclude:
+    - db/schema.rb
+
+Lint/LambdaWithoutLiteralBlock:
+  Enabled: true
+
+Lint/NoReturnInBeginEndBlocks:
+  Enabled: true
+Lint/NumberedParameterAssignment:
+  Enabled: true
+
+Lint/OrAssignmentToConstant:
+  Enabled: true
+
+Lint/RedundantDirGlobSort:
+  Enabled: true
+
+Lint/SymbolConversion:
+  Enabled: true
+
+Lint/ToEnumArguments:
+  Enabled: true
+
+Lint/TripleQuotes:
+  Enabled: true
+
+Lint/UnexpectedBlockArity:
+  Enabled: true
+
+Lint/UnmodifiedReduceAccumulator:
+  Enabled: true
+
+Lint/MissingSuper:
+  Enabled: false
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+  Max: 2
+
+RSpec/ExampleLength:
+  Enabled: true
+  Max: 20
+
+RSpec/NestedGroups:
+  Enabled: true
+  Max: 6
+
+Naming/PredicateName:
+  Description: Check the names of predicate methods.
+  StyleGuide: https://github.com/rubocop-hq/ruby-style-guide#bool-methods-qmark
+  Enabled: true
+  ForbiddenPrefixes:
+    - is_
+    - has_
+    - have_
+    - can_
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: true
+  IgnoredMethods: [change]
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+
+
+
+#TODO
+
+RSpec/ContextWording:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Description: Checks if example groups contain too many `let` and `subject` calls.
+  Enabled: false
+  AllowSubject: false
+  Max: 5
+  StyleGuide: https://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/MultipleMemoizedHelpers
+
+RSpec/LetSetup:
+  Enabled: false
+
+Rails/ReflectionClassName:
+  Enabled: false
+
+Rails/InverseOf:
+  Enabled: false
+
+RSpec/AnyInstance:
+  Enabled: false
+
+RSpec/SubjectStub:
+  Enabled: false
+
+RSpec/VerifiedDoubles:
+  Enabled: false
+
+RSpec/MessageSpies:
+  Enabled: false
+
+RSpec/StubbedMock:
+  Enabled: false
+
+RSpec/ExpectInHook:
+  Enabled: false

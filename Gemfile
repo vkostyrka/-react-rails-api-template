@@ -11,9 +11,15 @@ gem "bootsnap", require: false
 gem "rack-cors"
 
 group :development, :test do
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "pry"
 end
 
 group :development do
+  gem 'prettier'
+  gem 'rubocop',              require: false
+  gem 'rubocop-performance',  require: false
+  gem 'rubocop-rails',        require: false
+  gem 'rubocop-config-prettier'
+  gem 'rubocop-rspec',        require: false
 end
 
